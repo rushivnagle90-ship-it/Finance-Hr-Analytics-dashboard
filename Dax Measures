@@ -1,0 +1,95 @@
+Finance Measures
+
+Measure 1:
+daxTotal Revenue = 
+SUM(Monthly_Financials[Revenue_Cr])
+
+Measure 2:
+daxTotal Profit = 
+SUM(Monthly_Financials[Net_Profit_Cr])
+
+Measure 3:
+daxGross Profit = 
+SUM(Monthly_Financials[Gross_Profit_Cr])
+
+Measure 4:
+daxNet Margin % = 
+DIVIDE([Total Profit], [Total Revenue], 0)
+
+Measure 5:
+daxGross Margin % = 
+DIVIDE([Gross Profit], [Total Revenue], 0)
+
+Measure 6:
+daxBudget Variance = 
+SUM(Monthly_Financials[Revenue_Cr]) - 
+SUM(Monthly_Financials[Budget_Revenue_Cr])
+
+Measure 7:
+daxBudget Variance % = 
+DIVIDE([Budget Variance], 
+SUM(Monthly_Financials[Budget_Revenue_Cr]), 0)
+HR Measures
+
+Measure 8:
+daxTotal Headcount = 
+COUNTROWS(Employee_Master)
+
+Measure 9:
+daxAvg Salary = 
+AVERAGE(Employee_Master[Annual_CTC_Lakhs])
+
+Measure 10:
+daxAvg Performance = 
+AVERAGE(Employee_Master[Performance_Rating])
+
+Measure 11:
+daxHigh Risk Employees = 
+CALCULATE(
+    COUNTROWS(Employee_Master),
+    Employee_Master[Attrition_Risk_Label] = "High"
+)
+
+Measure 12:
+daxMedium Risk Employees = 
+CALCULATE(
+    COUNTROWS(Employee_Master),
+    Employee_Master[Attrition_Risk_Label] = "Medium"
+)
+
+Measure 13:
+daxAttrition Rate = 
+DIVIDE(
+    SUM(Attrition_Data[Total_Exits]),
+    AVERAGE(Attrition_Data[Headcount_Start]),
+    0
+)
+
+Measure 14:
+daxTotal Exits = 
+SUM(Attrition_Data[Total_Exits])
+
+Measure 15:
+daxCost of Attrition = 
+SUM(Attrition_Data[Cost_of_Attrition_Lakhs])
+Executive Measures
+
+Measure 16:
+daxRevenue Per Employee = 
+DIVIDE(
+    [Total Revenue] * 100,
+    [Total Headcount],
+    0
+)
+
+Measure 17:
+daxHR Cost % Revenue = 
+DIVIDE(
+    SUM(Monthly_Financials[Employee_Cost_Cr]),
+    [Total Revenue],
+    0
+)
+
+Measure 18:
+daxTotal EBITDA = 
+SUM(Monthly_Financials[EBITDA_Cr])
